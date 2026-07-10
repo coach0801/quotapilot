@@ -1,0 +1,35 @@
+{
+  "chat": {
+    "id": "cmpl-mistral-fixture",
+    "object": "chat.completion",
+    "created": 1752000000,
+    "model": "mistral-small-latest",
+    "choices": [
+      {
+        "index": 0,
+        "message": { "role": "assistant", "content": "Bonjour from Mistral!" },
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": { "prompt_tokens": 10, "completion_tokens": 6, "total_tokens": 16 }
+  },
+  "stream": [
+    {
+      "id": "cmpl-mistral-stream",
+      "object": "chat.completion.chunk",
+      "model": "mistral-small-latest",
+      "choices": [{ "index": 0, "delta": { "content": "Bon" }, "finish_reason": null }]
+    },
+    {
+      "id": "cmpl-mistral-stream",
+      "object": "chat.completion.chunk",
+      "model": "mistral-small-latest",
+      "choices": [{ "index": 0, "delta": { "content": "jour" }, "finish_reason": "stop" }],
+      "usage": { "prompt_tokens": 10, "completion_tokens": 2, "total_tokens": 12 }
+    }
+  ],
+  "rateLimitHeaders": {
+    "x-ratelimitbysize-limit": "500000",
+    "x-ratelimitbysize-remaining": "499500"
+  }
+}

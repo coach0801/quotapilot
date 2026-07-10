@@ -1,0 +1,22 @@
+name: Daily rollup
+
+on:
+  schedule:
+    - cron: "23 0 * * *"
+  workflow_dispatch:
+
+jobs:
+  rollup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Aggregate request_logs → daily_rollups, prune >30d
+        run: npm run rollup
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}

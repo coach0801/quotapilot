@@ -1,0 +1,34 @@
+{
+  "chat": {
+    "id": "gen-openrouter-fixture",
+    "object": "chat.completion",
+    "created": 1752000000,
+    "model": "meta-llama/llama-3.3-70b-instruct:free",
+    "choices": [
+      {
+        "index": 0,
+        "message": { "role": "assistant", "content": "Hello from OpenRouter!" },
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": { "prompt_tokens": 9, "completion_tokens": 4, "total_tokens": 13 }
+  },
+  "stream": [
+    {
+      "id": "gen-openrouter-stream",
+      "object": "chat.completion.chunk",
+      "model": "meta-llama/llama-3.3-70b-instruct:free",
+      "choices": [{ "index": 0, "delta": { "content": "Hi" }, "finish_reason": null }]
+    },
+    {
+      "id": "gen-openrouter-stream",
+      "object": "chat.completion.chunk",
+      "model": "meta-llama/llama-3.3-70b-instruct:free",
+      "choices": [{ "index": 0, "delta": { "content": " there" }, "finish_reason": "stop" }]
+    }
+  ],
+  "rateLimitHeaders": {
+    "x-ratelimit-limit": "20",
+    "x-ratelimit-remaining": "19"
+  }
+}

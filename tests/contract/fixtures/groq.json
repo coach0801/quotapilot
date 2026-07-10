@@ -1,0 +1,53 @@
+{
+  "chat": {
+    "id": "chatcmpl-groq-fixture",
+    "object": "chat.completion",
+    "created": 1752000000,
+    "model": "llama-3.3-70b-versatile",
+    "choices": [
+      {
+        "index": 0,
+        "message": { "role": "assistant", "content": "Hello from Groq!" },
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": { "prompt_tokens": 12, "completion_tokens": 5, "total_tokens": 17 }
+  },
+  "stream": [
+    {
+      "id": "chatcmpl-groq-stream",
+      "object": "chat.completion.chunk",
+      "model": "llama-3.3-70b-versatile",
+      "choices": [
+        { "index": 0, "delta": { "role": "assistant", "content": "" }, "finish_reason": null }
+      ]
+    },
+    {
+      "id": "chatcmpl-groq-stream",
+      "object": "chat.completion.chunk",
+      "model": "llama-3.3-70b-versatile",
+      "choices": [{ "index": 0, "delta": { "content": "Hello" }, "finish_reason": null }]
+    },
+    {
+      "id": "chatcmpl-groq-stream",
+      "object": "chat.completion.chunk",
+      "model": "llama-3.3-70b-versatile",
+      "choices": [{ "index": 0, "delta": { "content": " world" }, "finish_reason": null }]
+    },
+    {
+      "id": "chatcmpl-groq-stream",
+      "object": "chat.completion.chunk",
+      "model": "llama-3.3-70b-versatile",
+      "choices": [{ "index": 0, "delta": {}, "finish_reason": "stop" }],
+      "x_groq": { "usage": { "prompt_tokens": 12, "completion_tokens": 2 } }
+    }
+  ],
+  "rateLimitHeaders": {
+    "x-ratelimit-limit-requests": "14400",
+    "x-ratelimit-remaining-requests": "14370",
+    "x-ratelimit-limit-tokens": "6000",
+    "x-ratelimit-remaining-tokens": "5460",
+    "x-ratelimit-reset-requests": "2m59.56s",
+    "x-ratelimit-reset-tokens": "7.66s"
+  }
+}

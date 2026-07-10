@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    # Nightly: adapter live smoke tests against real provider APIs (demo keys)
+    - cron: "17 3 * * *"
+
+jobs:
+  checks:
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Lint
+        run: npm run lint
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Unit + contract tests (with core coverage gate)
+        run: npm run test:coverage
+      - name: Build
+        run: npm run build
+
+  live-smoke:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Adapter live smoke (real APIs, demo keys)
+        run: npm run test:live
+        env:
+          QP_LIVE: "1"
+          DEMO_GROQ_KEY: ${{ secrets.DEMO_GROQ_KEY }}
+          DEMO_GEMINI_KEY: ${{ secrets.DEMO_GEMINI_KEY }}
+          DEMO_MISTRAL_KEY: ${{ secrets.DEMO_MISTRAL_KEY }}
+          DEMO_OPENROUTER_KEY: ${{ secrets.DEMO_OPENROUTER_KEY }}
+          DEMO_GITHUB_TOKEN: ${{ secrets.DEMO_GITHUB_TOKEN }}

@@ -1,0 +1,35 @@
+{
+  "chat": {
+    "responseId": "resp-gemini-fixture",
+    "modelVersion": "gemini-2.5-flash",
+    "candidates": [
+      {
+        "content": { "role": "model", "parts": [{ "text": "Hello from Gemini!" }] },
+        "finishReason": "STOP"
+      }
+    ],
+    "usageMetadata": {
+      "promptTokenCount": 8,
+      "candidatesTokenCount": 6,
+      "totalTokenCount": 14
+    }
+  },
+  "stream": [
+    {
+      "responseId": "resp-gemini-stream",
+      "modelVersion": "gemini-2.5-flash",
+      "candidates": [{ "content": { "role": "model", "parts": [{ "text": "Hel" }] } }]
+    },
+    {
+      "responseId": "resp-gemini-stream",
+      "modelVersion": "gemini-2.5-flash",
+      "candidates": [
+        {
+          "content": { "role": "model", "parts": [{ "text": "lo!" }] },
+          "finishReason": "STOP"
+        }
+      ],
+      "usageMetadata": { "promptTokenCount": 8, "candidatesTokenCount": 2, "totalTokenCount": 10 }
+    }
+  ]
+}

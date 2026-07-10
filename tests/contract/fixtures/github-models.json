@@ -1,0 +1,34 @@
+{
+  "chat": {
+    "id": "chatcmpl-ghm-fixture",
+    "object": "chat.completion",
+    "created": 1752000000,
+    "model": "openai/gpt-4o-mini",
+    "choices": [
+      {
+        "index": 0,
+        "message": { "role": "assistant", "content": "Hello from GitHub Models!" },
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": { "prompt_tokens": 11, "completion_tokens": 6, "total_tokens": 17 }
+  },
+  "stream": [
+    {
+      "id": "chatcmpl-ghm-stream",
+      "object": "chat.completion.chunk",
+      "model": "openai/gpt-4o-mini",
+      "choices": [{ "index": 0, "delta": { "content": "Hey" }, "finish_reason": null }]
+    },
+    {
+      "id": "chatcmpl-ghm-stream",
+      "object": "chat.completion.chunk",
+      "model": "openai/gpt-4o-mini",
+      "choices": [{ "index": 0, "delta": {}, "finish_reason": "stop" }]
+    }
+  ],
+  "rateLimitHeaders": {
+    "x-ratelimit-limit-requests": "150",
+    "x-ratelimit-remaining-requests": "148"
+  }
+}
