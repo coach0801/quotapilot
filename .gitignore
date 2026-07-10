@@ -49,3 +49,6 @@ coverage/
 
 # local claude settings
 .claude/
+
+.vercel
+.env*
