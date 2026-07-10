@@ -71,13 +71,28 @@ export function createMemoryRedis(clock: () => number = Date.now): RedisLike {
 
 let cached: RedisLike | undefined;
 
+/**
+ * Accept the several names under which Upstash REST credentials arrive:
+ * plain Upstash env vars, the Vercel marketplace integration (custom
+ * prefix "UPSTASH_REDIS"), and Vercel's default KV naming.
+ */
+function upstashEnv(): { url: string; token: string } | null {
+  const url =
+    process.env.UPSTASH_REDIS_REST_URL ??
+    process.env.UPSTASH_REDIS_KV_REST_API_URL ??
+    process.env.KV_REST_API_URL;
+  const token =
+    process.env.UPSTASH_REDIS_REST_TOKEN ??
+    process.env.UPSTASH_REDIS_KV_REST_API_TOKEN ??
+    process.env.KV_REST_API_TOKEN;
+  return url && token ? { url, token } : null;
+}
+
 export function getRedis(): RedisLike {
   if (cached) return cached;
-  const url = process.env.UPSTASH_REDIS_REST_URL;
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
-  cached =
-    url && token
-      ? (new Redis({ url, token }) as unknown as RedisLike)
-      : createMemoryRedis();
+  const env = upstashEnv();
+  cached = env
+    ? (new Redis(env) as unknown as RedisLike)
+    : createMemoryRedis();
   return cached;
 }
